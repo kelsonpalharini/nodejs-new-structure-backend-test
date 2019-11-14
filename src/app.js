@@ -1,5 +1,9 @@
 import express from "express";
 import routes from "./routes";
+import cors from "cors";
+import bodyParser from "body-parser";
+
+global.XMLHttpRequest = require("xhr2");
 
 class App {
   constructor() {
@@ -10,7 +14,9 @@ class App {
   }
 
   middlewares() {
-    this.server.use(express.json());
+    this.server.use(cors());
+    this.server.use(bodyParser.urlencoded({ extended: false }));
+    this.server.use(bodyParser.json());
   }
 
   routes() {
